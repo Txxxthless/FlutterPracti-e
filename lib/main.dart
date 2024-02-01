@@ -8,76 +8,102 @@ const sundarban =
 
 void main() {
   runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+    const AppWidget(),
+  );
+}
+
+class AppWidget extends StatelessWidget {
+  const AppWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Image.network(
+            imageUrl,
+            height: 250,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                _headerSection(),
+                _actionSection(),
+                _textSection(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Text _textSection() => Text(sundarban);
+
+  Padding _actionSection() {
+    return Padding(
+      padding: EdgeInsets.all(30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _actionIcon(Icons.phone, 'CALL'),
+          _actionIcon(Icons.navigation, 'ROUTE'),
+          _actionIcon(Icons.share, 'SHARE'),
+        ],
+      ),
+    );
+  }
+
+  Column _actionIcon(IconData icon, String text) {
+    return Column(
+      children: [
+        Icon(icon, color: Colors.blue),
+        Text(text, style: const TextStyle(color: Colors.blue)),
+      ],
+    );
+  }
+
+  Row _headerSection() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              imageUrl,
-              height: 250,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            Text(
+              'Oeschinen Lake Campground',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const Padding(
-              padding: EdgeInsets.all(30),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Oeschinen Lake Campground',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text('Kandersteg, Switzerland',
-                              style: TextStyle(color: Colors.grey)),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.star, color: Colors.orange),
-                          Text('41'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Icon(Icons.phone, color: Colors.blue),
-                            Text('CALL', style: TextStyle(color: Colors.blue)),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Icon(Icons.navigation, color: Colors.blue),
-                            Text('ROUTE', style: TextStyle(color: Colors.blue)),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Icon(Icons.share, color: Colors.blue),
-                            Text('SHARE', style: TextStyle(color: Colors.blue)),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(sundarban),
-                ],
-              ),
-            ),
+            Text('Kandersteg, Switzerland',
+                style: TextStyle(color: Colors.grey)),
           ],
         ),
-      ),
-    ),
-  );
+        Row(
+          children: [
+            Icon(Icons.star, color: Colors.orange),
+            Text('41'),
+          ],
+        ),
+      ],
+    );
+  }
 }
