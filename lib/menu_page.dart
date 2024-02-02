@@ -8,7 +8,7 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu'),
+        title: const Text('Menu'),
       ),
       body: Center(
         child: Column(
@@ -19,11 +19,11 @@ class MenuPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TodoApp(),
+                    builder: (context) => const TodoApp(),
                   ),
                 );
               },
-              child: Text('Todo App'),
+              child: const Text('Todo App'),
             ),
           ],
         ),

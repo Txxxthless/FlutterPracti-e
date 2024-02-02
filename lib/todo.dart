@@ -9,7 +9,7 @@ class TodoApp extends StatefulWidget {
 
 class _TodoAppState extends State<TodoApp> {
   final _controller = TextEditingController();
-  TodoPriority priority = TodoPriority.Normal;
+  TodoPriority priority = TodoPriority.normal;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class _TodoAppState extends State<TodoApp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Radio<TodoPriority>(
-                    value: TodoPriority.Low,
+                    value: TodoPriority.low,
                     groupValue: priority,
                     onChanged: (value) {
                       setBuilderState(
@@ -80,9 +80,9 @@ class _TodoAppState extends State<TodoApp> {
                       );
                     },
                   ),
-                  Text(TodoPriority.Low.name),
+                  Text(TodoPriority.low.name),
                   Radio<TodoPriority>(
-                    value: TodoPriority.Normal,
+                    value: TodoPriority.normal,
                     groupValue: priority,
                     onChanged: (value) {
                       setBuilderState(
@@ -92,9 +92,9 @@ class _TodoAppState extends State<TodoApp> {
                       );
                     },
                   ),
-                  Text(TodoPriority.Normal.name),
+                  Text(TodoPriority.normal.name),
                   Radio<TodoPriority>(
-                    value: TodoPriority.High,
+                    value: TodoPriority.high,
                     groupValue: priority,
                     onChanged: (value) {
                       setBuilderState(
@@ -104,7 +104,7 @@ class _TodoAppState extends State<TodoApp> {
                       );
                     },
                   ),
-                  Text(TodoPriority.High.name),
+                  Text(TodoPriority.high.name),
                 ],
               ),
               ElevatedButton(
@@ -189,7 +189,7 @@ class MyTodo {
 }
 
 enum TodoPriority {
-  Low,
-  Normal,
-  High,
+  low,
+  normal,
+  high,
 }
