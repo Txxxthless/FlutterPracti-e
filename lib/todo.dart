@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/my_todo.dart';
+import 'package:flutter_application_1/todos_provider.dart';
+import 'package:provider/provider.dart';
 
 class TodoApp extends StatefulWidget {
   const TodoApp({super.key});
@@ -24,26 +27,24 @@ class _TodoAppState extends State<TodoApp> {
       appBar: AppBar(
         title: const Text('My Todos'),
       ),
-      body: MyTodo.todos.isEmpty
-          ? const Center(
-              child: Text('Nothind to do'),
-            )
-          : ListView.builder(
-              itemCount: MyTodo.todos.length,
-              itemBuilder: (context, index) {
-                final todo = MyTodo.todos[index];
-                return TodoItem(
-                  todo: todo,
-                  onChanged: (value) {
-                    setState(
-                      () {
-                        MyTodo.todos[index].completed = value;
-                      },
-                    );
-                  },
-                );
-              },
-            ),
+      body: Consumer<TodosProvider>(
+        builder: (context, provider, child) => provider.todos.isEmpty
+            ? const Center(
+                child: Text('Nothind to do'),
+              )
+            : ListView.builder(
+                itemCount: provider.todos.length,
+                itemBuilder: (context, index) {
+                  final todo = provider.todos[index];
+                  return TodoItem(
+                    todo: todo,
+                    onChanged: (value) {
+                      provider.toggleComplete(index);
+                    },
+                  );
+                },
+              ),
+      ),
     );
   }
 
@@ -130,9 +131,11 @@ class _TodoAppState extends State<TodoApp> {
       priority: priority,
     );
 
-    MyTodo.todos.add(todo);
+    Provider.of<TodosProvider>(
+      context,
+      listen: false,
+    ).addTodo(todo);
     _controller.clear();
-    setState(() {});
     Navigator.pop(context);
   }
 
@@ -170,26 +173,4 @@ class TodoItem extends StatelessWidget {
       },
     );
   }
-}
-
-class MyTodo {
-  int id;
-  String name;
-  bool completed;
-  TodoPriority priority;
-
-  MyTodo({
-    required this.id,
-    required this.name,
-    this.completed = false,
-    required this.priority,
-  });
-
-  static List<MyTodo> todos = [];
-}
-
-enum TodoPriority {
-  low,
-  normal,
-  high,
 }

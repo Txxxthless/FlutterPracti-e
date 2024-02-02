@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/menu_page.dart';
+import 'package:flutter_application_1/todos_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    const AppWidget(),
+    ChangeNotifierProvider(
+      create: (context) => TodosProvider(),
+      child: const AppWidget(),
+    ),
   );
 }
 
