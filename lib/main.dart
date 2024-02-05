@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/hurdle_provider.dart';
+import 'package:flutter_application_1/word_hurdle_page.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    App(),
+    ChangeNotifierProvider(
+      create: (context) => HurdleProvider(),
+      child: App(),
+    ),
   );
 }
 
@@ -14,10 +21,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        ),
         useMaterial3: true,
       ),
-      home: const Placeholder(),
+      builder: EasyLoading.init(),
+      home: WordHurdlePage(),
     );
   }
 }
